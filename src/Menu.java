@@ -69,10 +69,7 @@ public class Menu {
             Scanner scanner = new Scanner(System.in);
             System.out.println("== Sales Menu ==");
             System.out.println("1: Change Password");
-            System.out.println("2: Bonus Point");
             System.out.println("3: Product List");
-            System.out.println("4: Buy Product");
-            System.out.println("5: Print Previous Transactions");
             System.out.println("0: Exit program");
             System.out.print("Enter your choice : ");
             choice = scanner.nextInt();
