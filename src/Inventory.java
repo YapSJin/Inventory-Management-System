@@ -6,7 +6,6 @@ public class Inventory {
     public Inventory() {
 
     }
-
     public void addProduct(String prodName, int quantity, double price) {
         Product prod = new Product(prodName, quantity, price);
         try {
@@ -22,10 +21,79 @@ public class Inventory {
     }
 
     public void deleteProduct(int prodID) {
+        System.out.print("\nEnter Product id number (Pxx): ");
+            String id = insert.nextLine();
+                String line;
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(filename));
+                        while ((line = br.readLine()) != null) {
+                            if (line.contains(id)) {
+                                System.out.println("----------------------------------------------------------------------------------------");
+                                System.out.println("This record has been deleted!!\n");
+                                System.out.println(line);
+                                continue;
+                            } else {
+                                al.add(line);
+                            }
+                        }
+                    } catch (Exception e) {
+                        
+                    }
+                    try {
+                        FileWriter fw = new FileWriter(filename);
+                        for (int i = 0; i < al.size(); i++) {
+                            fw.append(al.get(i));
+                            fw.append("\n");
+                        }
 
+                        fw.close();
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    } finally {
+                        System.out.println("----------------------------------------------------------------------------------------");
+                    }
     }
 
     public void editProduct(int prodID) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            System.out.print("\nEnter id number to update product (Pxx): ");
+            id = insert.nextLine();
+
+            while ((line = br.readLine()) != null) {
+                if (line.contains(id)) {
+                    System.out.print("Enter the value that you want to change (Quantity/Price/Product Name) : ");
+                    String oldValue = input.next();
+                    System.out.print("Enter new value in the class (Quantity/Price/Product Name) : ");
+                    String newValue = input.next();
+
+                    al.add(line.replace(oldValue, newValue));
+                    System.out.println("---------------------------------------");
+                    System.out.println("Your Are Successful Modify The Record!!");
+                    System.out.println("---------------------------------------");
+
+                } else {
+                    al.add(line);
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            FileWriter fw = new FileWriter(filename);
+
+            for (int i = 0; i < al.size(); i++) {
+                fw.append(al.get(i));
+                fw.append("\n");
+            }
+
+            fw.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
