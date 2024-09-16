@@ -1,118 +1,49 @@
-import java.util.ArrayList;
-
 public class Product {
-
-    private static int counter = 0;
-    private static ArrayList<Product> products = new ArrayList<Product>();
-    private int id;
-    private String productid;
-    private double profit;
+    private int id = 0;
     private String name;
-    private double price;
     private int quantity;
+    private double price;
 
-    public static int getCounter() {
-        return counter;
+    public Product(String name, int quantity, double price) {
+        id++;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
     }
 
-    public static void setCounter(int counter) {
-        Product.counter = counter;
-    }
-
-    public String getProductid() {
-        return productid;
-    }
-
-    public void setProductid(String productid) {
-        this.productid = productid;
-    }
-
-    public Double getProfit() {
-        return profit;
-    }
-
-    public void setProfit(Double profit) {
-        this.profit = profit;
-    }
-
-    public Product(String prodid, String nm, double prc, int q, double p) {
-        products.add(this);
-        counter++;
-        setId(counter);
-        setProductid(prodid);
-        setName(nm);
-        setPrice(prc);
-        setQuantity(q);
-        setProfit(p);
-    }
-
-    public void setId(int iden) {
-        id = iden;
-    }
-
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setName(String nm) {
-        name = nm;
+    public void setID(int id) {
+        this.id = id;
     }
 
-    public String getName() {
+    public String setName() {
         return name;
     }
 
-    public static String getNameById(int id) {
-        for (Product product : products) {
-            if (product.getId() == id) {
-                return product.getName();
-            }
-        }
-        return null;
-    }
-
-    public void setPrice(double prc) {
-        price = prc;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public static double getPriceById(int id) {
-        for (Product product : products) {
-            if (product.getId() == id) {
-                return product.getPrice();
-            }
-        }
-        return -1;
-    }
-
-    public void setQuantity(int q) {
-        quantity = q;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public static ArrayList<Product> getProducts() {
-        return products;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public static Product checkAvailability(int iden) {
-        for (Product product : products) {
-            if (product.getId() == iden) {
-                return product;
-            }
-        }
-        return null;
+    public double getPrice() {
+        return price;
     }
 
-    @Override
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public String toString() {
-        return String.format("%d\t\t  %s\t\t  %s\t\t  RM%.2f\t\t  %d",
-                getId(), getProductid(), getName(), getPrice(), getQuantity());
+        return String.format("%d\t\t  %s\t\t  %d\t\t  RM%.2f", id, name, quantity, price);
     }
-
 }

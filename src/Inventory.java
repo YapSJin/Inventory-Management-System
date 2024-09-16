@@ -1,60 +1,48 @@
+import java.io.*;
+
 public class Inventory {
-    private String idNumber;
-    private String productName;
-    private int quantity;
-    private double price;
-    private double restockPrice;
+    private static String filename = "../inventory.txt";
 
-    public Inventory(String idNumber, String productName, int quantity, double price, double restockPrice) {
-        this.idNumber = idNumber;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.price = price;
-        this.restockPrice = restockPrice;
+    public Inventory() {
+
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public void addProduct(String prodName, int quantity, double price) {
+        Product prod = new Product(prodName, quantity, price);
+        try {
+            FileWriter fw = new FileWriter(filename, true);
+            fw.write(prod.toString());
+            fw.close();
+            System.out.println("----------------------------------");
+            System.out.println("The product added successfully!");
+            System.out.println("----------------------------------");
+        } catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+        }
     }
 
-    public String getProductName() {
-        return productName;
+    public void deleteProduct(int prodID) {
+
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void editProduct(int prodID) {
+
     }
 
-    public double getPrice() {
-        return price;
-    }
+    public void displayAll() {
+        System.out.println("\nProdID \tProdName\t Quantity\tPrice");
+        try {
+            FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
+            String line;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getRestockPrice() {
-        return restockPrice;
-    }
-
-    public void setRestockPrice(double restockPrice) {
-        this.restockPrice = restockPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "" + idNumber + "  " + productName + "  " + quantity + "  " + price + "  " + restockPrice;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+            fr.close();
+        } catch (Exception e) {
+            System.err.println("IOException: " + e.getMessage());
+        }
     }
 }
