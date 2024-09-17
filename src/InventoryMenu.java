@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class InventoryMenu {
-    public static String filename = "inventory.txt";
+    public static String filename = "../inventory.txt";
 
     public static void main(String[] args) {
         Inventory inv = new Inventory();
@@ -63,9 +63,10 @@ public class InventoryMenu {
     public static void menu() {
         System.out.print("\nInventory Management Module\n");
         System.out.println("1: Add Product");
-        System.out.println("2: Delete Product");
-        System.out.println("3: Update Product");
-        System.out.println("4: Display All Product");
+        System.out.println("2: Restock Product");
+        System.out.println("3: Delete Product");
+        System.out.println("4: Update Product");
+        System.out.println("5: Display All Product");
         System.out.println("0: Back");
         System.out.print("Enter option: ");
     }

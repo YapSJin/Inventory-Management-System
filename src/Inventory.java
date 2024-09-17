@@ -5,9 +5,14 @@ public class Inventory {
     private static String filename = "../inventory.txt";
     private ArrayList<String> al = new ArrayList<>();
 
-    public Inventory() {
-
+    public Inventory(String idNumber, String productName, int quantity, double price, double restockPrice) {
+        this.prodID = prodID;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.restockPrice = restockPrice;
     }
+    
     public void addProduct(String prodName, int quantity, double price) {
         Product prod = new Product(prodName, quantity, price);
         try {
@@ -20,6 +25,10 @@ public class Inventory {
         } catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
         }
+    }
+
+    public void restockProduct() {
+        
     }
 
     public void deleteProduct(int prodID) {
@@ -115,4 +124,5 @@ public class Inventory {
             System.err.println("IOException: " + e.getMessage());
         }
     }
+
 }
