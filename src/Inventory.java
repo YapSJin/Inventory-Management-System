@@ -1,7 +1,9 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Inventory {
     private static String filename = "../inventory.txt";
+    private ArrayList<String> al = new ArrayList<>();
 
     public Inventory() {
 
