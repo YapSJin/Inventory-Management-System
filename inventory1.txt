@@ -1,5 +1,0 @@
-P01,Potato Chips,200,RM4.5
-P02,Maggi,100,RM3.5
-P03,T-Shirt,150,RM12.5
-P04,Stabilo Pencil,400,RM8.5
-P05,Carlsberg,500,RM121.98
