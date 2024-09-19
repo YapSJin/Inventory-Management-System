@@ -4,7 +4,7 @@ public class InventoryMenu {
     public static String filename = "../inventory.txt";
 
     public static void main(String[] args) {
-        Inventory inv = new Inventory();
+        CRUD inv = new CRUD();
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
 
@@ -25,17 +25,24 @@ public class InventoryMenu {
 
                     inv.addProduct(prodName, quantity, price);
                     break;
-
                 case 2:
+                inv.displayAll();
+                System.out.print("\nEnter Product ID to restock: ");
+                    int prodID = scanner.nextInt();
+
+                    inv.restockProduct(prodID);
+                    break;
+
+                case 3:
                     inv.displayAll();
 
                     System.out.print("\nEnter Product ID to delete: ");
-                    int prodID = scanner.nextInt();
+                    prodID = scanner.nextInt();
 
                     inv.deleteProduct(prodID);
                     break;
 
-                case 3:
+                case 4:
                     inv.displayAll();
 
                     System.out.print("\nEnter Product ID to edit: ");
@@ -44,7 +51,7 @@ public class InventoryMenu {
                     inv.editProduct(prodID);
                     break;
 
-                case 4:
+                case 5:
                     inv.displayAll();
                     break;
 
