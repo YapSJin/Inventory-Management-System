@@ -4,35 +4,20 @@ import java.util.Date;
 public class Receipt {
 
     private static int counter = 0;
-    private static ArrayList<Receipt> receipts = new ArrayList<Receipt>();
+    private static ArrayList<Receipt> receipts = new ArrayList<>();
     private int id;
-    private Member customer;
     private Date date;
     private double cost;
-    private ArrayList<int[]> basket = new ArrayList<int[]>();
+    private ArrayList<int[]> basket = new ArrayList<>();
     private int items;
 
-    public Receipt(Customer cust, ArrayList<int[]> bskt) {
+    public Receipt(ArrayList<int[]> bskt) {
         receipts.add(this);
         counter++;
         setId(counter);
         setDate(new Date());
-        setBonusCustomer(cust);
         setBasket(bskt);
         calculateCost();
-
-    }
-
-    public void setBonusCustomer(Customer cust) {
-        if (cust instanceof Member) {
-            customer = (Member) cust;
-        } else {
-            customer = null;
-        }
-    }
-
-    public Member getBonusCustomer() {
-        return customer;
     }
 
     public void setId(int iden) {
@@ -59,30 +44,27 @@ public class Receipt {
         return basket;
     }
 
-    public void setItems(int it) {
-        items = it;
-    }
-
     public int getItems() {
         return items;
     }
 
     public void calculateCost() {
         ArrayList<Product> products = Product.getProducts();
-        double price;
-        double cost = 0;
-        int quantity;
+        double totalCost = 0;
+        items = 0;
+
         for (int[] purchase : basket) {
             for (Product product : products) {
-                if (product.getId() == purchase[0]) {
-                    price = product.getPrice();
-                    quantity = purchase[1];
-                    cost += price * quantity;
+                if (product.getId().equals(String.valueOf(purchase[0]))) {
+                    double price = product.getPrice();
+                    int quantity = purchase[1];
+                    totalCost += price * quantity;
+                    items += quantity; // Count total items
                     break;
                 }
             }
         }
-        setCost(cost);
+        setCost(totalCost);
     }
 
     public void setCost(double cst) {
@@ -105,18 +87,17 @@ public class Receipt {
         System.out.println("Date of issue: " + getDate());
         for (int[] purchase : basket) {
             String name = Product.getNameById(purchase[0]);
-            String price = Double.toString(Product.getPriceById(purchase[0]));
-            String quantity = Integer.toString(purchase[1]);
-            String cost = Double.toString(Double.parseDouble(price) * purchase[1]);
-            System.out.printf("%s RM%s x %s\n", name, price, quantity);
-            System.out.printf("                                = RM%s \n", cost);
+            double price = Product.getPriceById(purchase[0]);
+            int quantity = purchase[1];
+            double totalCost = price * quantity;
+            System.out.printf("%s RM%.2f x %d\n", name, price, quantity);
+            System.out.printf("                                = RM%.2f \n", totalCost);
         }
     }
 
     @Override
     public String toString() {
-        return String.format("Date of issue: %s, Total Cost: RM %f, " + "Bought items: %d", getDate(), getCost(),
-                getItems());
+        return String.format("Date of issue: %s, Total Cost: RM %.2f, Items Bought: %d", 
+            getDate(), getCost(), getItems());
     }
-
 }
