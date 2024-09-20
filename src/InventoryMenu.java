@@ -27,17 +27,28 @@ public class InventoryMenu {
                     break;
                 case 2:
                     inv.displayAll();
-                    inv.restockProduct();
+                    System.out.print("\nEnter Product ID to Restock: ");
+                    int prodID = scanner.nextInt();
+
+                    inv.restockProduct(prodID);
                     break;
 
                 case 3:
                     inv.displayAll();
-                    inv.deleteProduct();
+
+                    System.out.print("\nEnter Product ID to delete: ");
+                    int prodID = scanner.nextInt();
+
+                    inv.deleteProduct(prodID);
                     break;
 
                 case 4:
                     inv.displayAll();
-                    inv.editProduct();
+
+                    System.out.print("\nEnter Product ID to edit: ");
+                    prodID = scanner.nextInt();
+
+                    inv.editProduct(prodID);
                     break;
 
                 case 5:
