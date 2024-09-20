@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class InventoryMenu {
-    public static String filename = "../inventory.txt";
+    public static String filename = "inventory.txt";
 
     public static void main(String[] args) {
-        CRUD inv = new CRUD();
+        Inventory inv = new Inventory();
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
 
@@ -26,8 +26,8 @@ public class InventoryMenu {
                     inv.addProduct(prodName, quantity, price);
                     break;
                 case 2:
-                inv.displayAll();
-                System.out.print("\nEnter Product ID to restock: ");
+                    inv.displayAll();
+                    System.out.print("\nEnter Product ID to restock: ");
                     int prodID = scanner.nextInt();
 
                     inv.restockProduct(prodID);
