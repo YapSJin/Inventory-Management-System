@@ -5,173 +5,38 @@ import java.util.Scanner;
 
 public class Inventory {
     private static String filename = "../inventory.txt";
-    private Scanner input = new Scanner(System.in); // For user input
+    private ArrayList<Product> inventory = new ArrayList<>();
 
     public Inventory() {
+        loadFromFile();
     }
 
     // Function to add a product
     public void addProduct(String prodName, int quantity, double price) {
-        Product prod = new Product(prodName, quantity, price);
-        try (FileWriter fw = new FileWriter(filename, true)) {
-            fw.write(prod.toString() + "\n"); // Ensure a newline for each product
-            System.out.println("----------------------------------");
-            System.out.println("The product added successfully!");
-            System.out.println("----------------------------------");
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        }
+        int id = inventory.size()+1;
+        Product prod = new Product(id, prodName, quantity, price);
+        inventory.add(prod);
+        saveToFile(prod);
+        System.out.println("Product Added Successfully");
     }
 
     // Function to restock a product
-    public void restockProduct(int prodID) {
-        List<String> al = new ArrayList<>(); // Temporary list to store inventory data
-        boolean productFound = false;
-        String line;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            while ((line = br.readLine()) != null) {
-                String[] productData = line.split("\t");
-                int currentProdID = Integer.parseInt(productData[0].trim()); // Assume the prodID is stored in the first field
-
-                if (currentProdID == prodID) {
-                    int currentQuantity = Integer.parseInt(productData[2].trim());
-
-                    // Ask user for quantity to restock
-                    System.out.print("Enter the quantity to restock: ");
-                    int restockQuantity = input.nextInt();
-                    input.nextLine(); // Consume newline
-
-                    // Update quantity
-                    int newQuantity = currentQuantity + restockQuantity;
-                    productData[2] = String.valueOf(newQuantity); // Update quantity
-
-                    // Rebuild line with updated quantity
-                    String updatedLine = String.join("\t", productData);
-                    al.add(updatedLine);
-                    productFound = true;
-
-                    System.out.println("Product restocked! New Quantity: " + newQuantity);
-                } else {
-                    al.add(line); // Add unchanged lines
-                }
-            }
-
-            if (!productFound) {
-                System.out.println("Product with ID " + prodID + " not found!");
-            }
-
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        }
-
-        // Rewrite the file with updated product info
-        try (FileWriter fw = new FileWriter(filename)) {
-            for (String item : al) {
-                fw.write(item + "\n");
-            }
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        }
+    public void restockProduct() {
+        
     }
+    
 
     // Function to delete a product
-    public void deleteProduct(int prodID) {
-        List<String> al = new ArrayList<>();
-        boolean productFound = false;
-        String line;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            while ((line = br.readLine()) != null) {
-                String[] productData = line.split("\t");
-                int currentProdID = Integer.parseInt(productData[0].trim());
-
-                if (currentProdID == prodID) {
-                    productFound = true; // Skip the line (delete the product)
-                    System.out.println("Product with ID " + prodID + " deleted.");
-                } else {
-                    al.add(line); // Add other lines to the list
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        }
-
-        // If product is found, rewrite the file without the deleted product
-        if (productFound) {
-            try (FileWriter fw = new FileWriter(filename)) {
-                for (String item : al) {
-                    fw.write(item + "\n");
-                }
-            } catch (IOException e) {
-                System.err.println("IOException: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Product with ID " + prodID + " not found.");
-        }
+    public void deleteProduct() {
+        
     }
+    
 
     // Function to edit a product
-    public void editProduct(int prodID) {
-        List<String> al = new ArrayList<>();
-        boolean productFound = false;
-        String line;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            while ((line = br.readLine()) != null) {
-                String[] productData = line.split("\t");
-                int currentProdID = Integer.parseInt(productData[0].trim());
-
-                if (currentProdID == prodID) {
-                    // Display options to the user for editing
-                    System.out.print("Enter the field to edit (name/quantity/price): ");
-                    String fieldToEdit = input.nextLine();
-
-                    switch (fieldToEdit.toLowerCase()) {
-                        case "name":
-                            System.out.print("Enter the new name: ");
-                            productData[1] = input.nextLine();
-                            break;
-                        case "quantity":
-                            System.out.print("Enter the new quantity: ");
-                            productData[2] = input.nextLine();
-                            break;
-                        case "price":
-                            System.out.print("Enter the new price: ");
-                            productData[3] = input.nextLine();
-                            break;
-                        default:
-                            System.out.println("Invalid field.");
-                            return;
-                    }
-
-                    // Rebuild the product line with the updated info
-                    String updatedLine = String.join("\t", productData);
-                    al.add(updatedLine);
-                    productFound = true;
-
-                    System.out.println("Product updated successfully.");
-                } else {
-                    al.add(line); // Add unchanged lines
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        }
-
-        // Rewrite the file with updated product info
-        if (productFound) {
-            try (FileWriter fw = new FileWriter(filename)) {
-                for (String item : al) {
-                    fw.write(item + "\n");
-                }
-            } catch (IOException e) {
-                System.err.println("IOException: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Product with ID " + prodID + " not found.");
-        }
+    public void editProduct() {
+        
     }
+    
 
     // Function to display all products
     public void displayAll() {
@@ -185,4 +50,61 @@ public class Inventory {
             System.err.println("IOException: " + e.getMessage());
         }
     }
+    private void loadFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] staffData = line.split("\\|");
+                int id = Integer.parseInt(staffData[0]);
+                String name = staffData[1];
+                String ICNum = staffData[2];
+                String phone = staffData[3];
+                String email = staffData[4];
+                String password = staffData[5];
+
+                if (staffData.length == 9) {
+                    double bonus = Double.parseDouble(staffData[6]);
+                    double fine = Double.parseDouble(staffData[7]);
+                    double salary = Double.parseDouble(staffData[8]);
+
+                    Product prod = new Product(id, prodName, quantity, price);
+                    Inventory.add(inventory);
+                } else if (staffData.length == 7) {
+                    int workHours = Integer.parseInt(staffData[6]);
+
+                    ParttimeStaff staff = new ParttimeStaff(id, name, ICNum, phone, email, password, workHours);
+                    management.add(staff);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from Inventory.txt");
+            e.printStackTrace();
+        }
+    }
+
+    private void saveToFile(Product product) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
+            writer.write(product.toString());
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("An error occurred write writing to Inventory.txt");
+            e.printStackTrace();
+        }
+    }
+
+    private void updateFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for Product product : inventory) {
+                writer.write(inventory.toString());
+                writer.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred write writing to Inventory.txt");
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+

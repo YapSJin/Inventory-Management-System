@@ -4,8 +4,8 @@ public class Product {
     private int quantity;
     private double price;
 
-    public Product(String name, int quantity, double price) {
-        id++;
+    public Product(int id, String name, int quantity, double price) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -44,6 +44,6 @@ public class Product {
     }
 
     public String toString() {
-        return String.format("%d\t\t  %s\t\t  %d\t\t  RM%.2f", id, name, quantity, price);
+        return String.format("%d|%s|%d|RM%.2f", id, name, quantity, price);
     }
 }

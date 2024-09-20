@@ -1,11 +1,11 @@
-01    Potato_Chips   150    4.50    3.00 
-02       Maggi_Mee   100    5.50    3.00 
-03    Nike_T-Shirt   150   32.50   22.65 
-04   Castle_Pencil   400    8.50    6.00 
-05       Carlsberg   500  121.98  110.80 
-06       Underwear   400   22.30   19.00 
-07   Gardenia_Roti   100    5.00    3.00 
-08       Sanitizer   220    8.99    6.20 
-09    Dulex_Condom   400   22.99   18.99 
-10       Kotex_+++   699   31.99   25.99 
-11             WEI    10   10.00   10.00 
+01    Potato_Chips   150    4.50
+02       Maggi_Mee   100    5.50
+03    Nike_T-Shirt   150   32.50
+04   Castle_Pencil   400    8.50
+05       Carlsberg   500  121.98
+06       Underwear   400   22.30
+07   Gardenia_Roti   100    5.00
+08       Sanitizer   220    8.99
+09    Dulex_Condom   400   22.99
+10       Kotex_+++   699   31.99
+11             WEI    10   10.00
