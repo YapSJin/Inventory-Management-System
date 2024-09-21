@@ -1,47 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author User
- */
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Receipt {
-
     private static int counter = 0;
-    private static ArrayList<Receipt> receipts = new ArrayList<Receipt>();
+    private static ArrayList<Receipt> receipts = new ArrayList<>();
     private int id;
-    private Member customer;
     private Date date;
     private double cost;
-    private ArrayList<int[]> basket = new ArrayList<int[]>();
+    private ArrayList<int[]> basket = new ArrayList<>();
     private int items;
+    private Inventory inventory; // Reference to Inventory
 
-    public Receipt(Customer cust, ArrayList<int[]> bskt) {
+    // Constructor now takes Inventory instance as a parameter
+    public Receipt(Inventory inventory, ArrayList<int[]> bskt) {
+        this.inventory = inventory; // Assign the passed inventory
         receipts.add(this);
         counter++;
         setId(counter);
         setDate(new Date());
-        setBonusCustomer(cust);
         setBasket(bskt);
         calculateCost();
-
-    }
-
-    public void setBonusCustomer(Customer cust) {
-        if (cust instanceof Member) {
-            customer = (Member) cust;
-        } else {
-            customer = null;
-        }
-    }
-
-    public Member getBonusCustomer() {
-        return customer;
     }
 
     public void setId(int iden) {
@@ -77,21 +55,20 @@ public class Receipt {
     }
 
     public void calculateCost() {
-        ArrayList<Product> products = Product.getProducts();
-        double price;
-        double cost = 0;
-        int quantity;
+        double totalCost = 0;
+        int totalItems = 0;
+
         for (int[] purchase : basket) {
-            for (Product product : products) {
-                if (product.getId() == purchase[0]) {
-                    price = product.getPrice();
-                    quantity = purchase[1];
-                    cost += price * quantity;
-                    break;
-                }
+            Product product = inventory.getProductById(purchase[0]);
+            if (product != null) {
+                double price = product.getPrice();
+                int quantity = purchase[1];
+                totalCost += price * quantity;
+                totalItems += quantity;
             }
         }
-        setCost(cost);
+        setCost(totalCost);
+        setItems(totalItems); // Set the total number of items
     }
 
     public void setCost(double cst) {
@@ -113,18 +90,22 @@ public class Receipt {
         System.out.printf("Receipt [%d]\n", getId());
         System.out.println("Date of issue: " + getDate());
         for (int[] purchase : basket) {
-            String name = Product.getNameById(purchase[0]);
-            String price = Double.toString(Product.getPriceById(purchase[0]));
-            String quantity = Integer.toString(purchase[1]);
-            String cost = Double.toString(Double.parseDouble(price) * purchase[1]);
-            System.out.printf("%s RM%s x %s\n", name, price, quantity);
-            System.out.printf("                                = RM%s \n", cost);
+            Product product = inventory.getProductById(purchase[0]);
+            if (product != null) {
+                String name = product.getName();
+                String price = String.format("%.2f", product.getPrice());
+                String quantity = Integer.toString(purchase[1]);
+                String cost = String.format("%.2f", product.getPrice() * purchase[1]);
+                System.out.printf("%s RM%s x %s\n", name, price, quantity);
+                System.out.printf("                                = RM%s \n", cost);
+            }
         }
+        System.out.printf("Total cost: RM%.2f\n", getCost());
+        System.out.printf("Total items: %d\n", getItems());
     }
 
     @Override
     public String toString() {
-        return String.format("Date of issue: %s, Total Cost: RM %f, " + "Bought items: %d", getDate(), getCost(), getItems());
+        return String.format("Date of issue: %s, Total Cost: RM %.2f, Bought items: %d", getDate(), getCost(), getItems());
     }
-
 }

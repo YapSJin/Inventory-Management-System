@@ -20,6 +20,7 @@ public class profit {
         profit.sst = sst;
     }
 
+    @SuppressWarnings("resource")
     public static void getProfitMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("== Report Menu ==");
@@ -40,14 +41,12 @@ public class profit {
                     BufferedReader ir = new BufferedReader(new FileReader("inventory.txt"));
 
                     Scanner x = new Scanner(ir);
-                    int num = 0;
                     double total = 0.0;
                     double total1 = 0.0;
                     new FileReader("inventory.txt");
 
                     while (x.hasNext()) {
                         String a = x.next();
-                        num++;
                         String b = x.next();
 
                         String c = x.next();
