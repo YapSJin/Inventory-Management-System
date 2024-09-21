@@ -1,12 +1,12 @@
-PROJECT TITLE: Inventory Management System
+PROJECT TITLE: Employee Management Module
 
-account for Admin login page
-username: Admin
-password: Admin
+Admin account credentials
+email: admin
+password: admin1234
 
-normal user account
-username:ali
+Staff account credentials
+email:ali@hotmail.com
 password:okok
 
-username:akao
+email:akao@gmail.com
 password:123

@@ -1,9 +1,0 @@
-E001 anson 12345 No.1234,Jalan_Gemilang,taman_cahaya 0112345678 anson3cm@gmail.com 0123456789 Public_bank 78945612 2000.0 10.0
-E002 zhenghong 0120 No.4689,Jalan_cahaya,taman_Gemiliang 0198765432 zhenghong11@gmail.com 0134567891 heongleong_bank 78444613 1200.0 10.0
-E003 abu 0000 No.11,Jalan_langkawi,taman_danau_kota 0115648213 abu666m@gmail.com 965324887 may_bank 78945613 1200.0 10.0
-E004 ali 65432 No.842,Jalan_putri,taman_kota 0119633851 ali999@gmail.com 861324587 Public_bank 70293745 1200.0 10.0
-M005 jinkai jki011 No.16,Jalan_longkang,taman_gaylan 015423564 jinkaino1@gmail.com 88431565 Public_bank 45678921 3000.0 10.0
-
-E006 anson3cm 78945 NO,3017,jalansriputri 4561237 an@gmail.com 78945 public_bank123456 1200.0 10.0
-
-
