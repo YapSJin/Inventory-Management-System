@@ -15,16 +15,7 @@ public class InventoryMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter product name: ");
-                    String prodName = scanner.nextLine();
-
-                    System.out.print("Enter quantity: ");
-                    int quantity = scanner.nextInt();
-
-                    System.out.print("Enter price of product (xx.xx): RM");
-                    double price = scanner.nextDouble();
-
-                    inv.addProduct(prodName, quantity, price);
+                    inv.addProduct(scanner);
                     break;
                 case 2:
                 inv.displayAll();

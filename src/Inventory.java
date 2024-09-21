@@ -10,12 +10,25 @@ public class Inventory {
         loadFromFile();
     }
 
-    public void addProduct(String prodName, int quantity, double price) {
-        int id = inventory.size()+1;
-        Product prod = new Product(id, prodName, quantity, price);
-        inventory.add(prod);
-        saveToFile(prod);
-        System.out.println("Product Added Successfully");
+    public void addProduct(Scanner scanner) {
+      System.out.print("Enter product name: ");
+      String prodName = scanner.nextLine();
+    
+      System.out.print("Enter quantity: ");
+      int quantity = scanner.nextInt();
+    
+      System.out.print("Enter price of product (xx.xx): RM");
+      double price = scanner.nextDouble();
+    
+      int newID = inventory.isEmpty() ? 1 : inventory.get(inventory.size() - 1).getID() + 1;
+    
+      Product prod = new Product(newID, prodName, quantity, price);
+      inventory.add(prod);
+      saveToFile(prod);
+    
+      System.out.println("-----------------------------");
+      System.out.println("Product successfully added!");
+      System.out.println("-----------------------------");
     }
 
     public void restockProduct(Scanner scanner, int prodID) {
@@ -211,7 +224,7 @@ public class Inventory {
 
     private void saveToFile(Product product) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-            writer.write(inventory.toString());
+            writer.write(product.toString());
             writer.newLine();
         } catch (IOException e) {
             System.out.println("An error occurred write writing to Inventory.txt");
