@@ -177,6 +177,14 @@ public class Inventory {
             System.err.println("IOException: " + e.getMessage());
         }
     }
+    public Product getProductById(int id) {
+      for (Product product : inventory) {
+          if (product.getID() == id) {
+              return product;
+          }
+      }
+      return null;
+  }
     private void loadFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;

@@ -42,7 +42,7 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
-
+    
     public String toString() {
         return String.format("%d|%s|%d|RM%.2f\n", id, name, quantity, price);
     }
