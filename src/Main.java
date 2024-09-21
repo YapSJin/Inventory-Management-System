@@ -28,7 +28,12 @@ public class Main {
             System.out.println("0: Exit");
             System.out.println("---------------------");
             System.out.print("Enter your choice: ");
-            choice = Integer.parseInt(scanner.nextLine());
+
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                choice = -1;
+            }
 
             switch (choice) {
                 case 1:
