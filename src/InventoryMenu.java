@@ -11,6 +11,7 @@ public class InventoryMenu {
         do {
             menu();
             choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -26,29 +27,25 @@ public class InventoryMenu {
                     inv.addProduct(prodName, quantity, price);
                     break;
                 case 2:
-                    inv.displayAll();
-                    System.out.print("\nEnter Product ID to Restock: ");
-                    int prodID = scanner.nextInt();
-
-                    inv.restockProduct(prodID);
-                    break;
+                inv.displayAll();
+                System.out.print("\nEnter Product ID to Restock: ");
+                int prodID = scanner.nextInt();
+                scanner.nextLine();
+                
+                inv.restockProduct(scanner, prodID);
+                break;
+                
 
                 case 3:
                     inv.displayAll();
 
-                    System.out.print("\nEnter Product ID to delete: ");
-                    int prodID = scanner.nextInt();
-
-                    inv.deleteProduct(prodID);
+                    inv.deleteProduct(scanner);
                     break;
 
                 case 4:
                     inv.displayAll();
 
-                    System.out.print("\nEnter Product ID to edit: ");
-                    prodID = scanner.nextInt();
-
-                    inv.editProduct(prodID);
+                    inv.editProduct(scanner);
                     break;
 
                 case 5:

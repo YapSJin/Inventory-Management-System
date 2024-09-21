@@ -44,6 +44,6 @@ public class Product {
     }
 
     public String toString() {
-        return String.format("%d|%s|%d|RM%.2f", id, name, quantity, price);
+        return String.format("%d|%s|%d|RM%.2f\n", id, name, quantity, price);
     }
 }

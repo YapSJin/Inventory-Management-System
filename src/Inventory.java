@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Inventory {
@@ -19,57 +18,49 @@ public class Inventory {
         System.out.println("Product Added Successfully");
     }
 
-    private void restockProduct(Scanner scanner, int prodID) {
-        try {
-          // Search for the product by ID in the file
+    public void restockProduct(Scanner scanner, int prodID) {
+      try {
           boolean productFound = false;
           int newQuantity = 0;
-      
+  
           BufferedReader reader = new BufferedReader(new FileReader(filename));
           String line;
           while ((line = reader.readLine()) != null) {
-            String[] productData = line.split("\\|");
-      
-            if (productData.length == 4 && Integer.parseInt(productData[0]) == prodID) {
-              productFound = true;
-              System.out.println("Current stock for product ID " + prodID + ": " + productData[2]);
-      
-              System.out.print("Enter the quantity to add: ");
-              int addQuantity = Integer.parseInt(scanner.nextLine());
-      
-              newQuantity = Integer.parseInt(productData[2]) + addQuantity;
-              break;
-            }
+              String[] productData = line.split("\\|");
+  
+              if (productData.length == 4 && Integer.parseInt(productData[0]) == prodID) {
+                  productFound = true;
+                  System.out.println("Current stock for product ID " + prodID + ": " + productData[2]);
+  
+                  System.out.print("Enter the quantity to add: ");
+                  int addQuantity = Integer.parseInt(scanner.nextLine());
+  
+                  newQuantity = Integer.parseInt(productData[2]) + addQuantity;
+                  break;
+              }
           }
           reader.close();
-      
+  
           if (productFound) {
-            // Update product quantity in the in-memory inventory
-            for (Product product : inventory) {
-              if (product.getID() == prodID) {
-                product.setQuantity(newQuantity);
-                break;
+              for (Product product : inventory) {
+                  if (product.getID() == prodID) {
+                      product.setQuantity(newQuantity);
+                      break;
+                  }
               }
-            }
-      
-            // Update the file using the updateFile function
-            updateFile();
-      
-            System.out.println("-----------------------------");
-            System.out.println("Product successfully restocked!");
-            System.out.println("New quantity: " + newQuantity);
-            System.out.println("-----------------------------");
-          } else {
-            // ... rest of the code for handling product not found and adding new product ...
+              updateFile();
+              System.out.println("-----------------------------");
+              System.out.println("Product successfully restocked!");
+              System.out.println("-----------------------------");
+          } else { 
+          System.out.println("Product not found");
           }
-        } catch (IOException e) {
+      } catch (IOException e) {
           System.out.println("An error occurred while reading/writing to Inventory.txt");
           e.printStackTrace();
-        }
       }
-    
-    
-      private void deleteProduct(Scanner scanner) {
+  }
+      public void deleteProduct(Scanner scanner) {
         System.out.print("\nEnter product ID to delete (or 'cancel' to stop): ");
         String input = scanner.nextLine().trim();
       
@@ -117,10 +108,7 @@ public class Inventory {
         }
       }
 
-    
-
-    // Function to edit a product
-    private void editProduct(Scanner scanner) {
+    public void editProduct(Scanner scanner) {
         System.out.print("\nEnter product ID to update (0 to cancel): ");
         int id = Integer.parseInt(scanner.nextLine());
       
@@ -136,7 +124,7 @@ public class Inventory {
           if (toUpdate != null) {
             boolean finished = false;
             do {
-              System.out.print("\nEnter field to update (or 'done' to confirm): ");
+              System.out.print("\nEnter field to update (name/quantity/price)('done' to confirm): ");
               String field = scanner.nextLine().toLowerCase();
       
               switch (field) {
@@ -179,7 +167,7 @@ public class Inventory {
       }
     
     public void displayAll() {
-        System.out.println("\nProdID\tProdName\tQuantity\tPrice");
+        System.out.println("\nProdID|ProdName|Quantity|Price");
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -226,7 +214,7 @@ public class Inventory {
     private void updateFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Product product : inventory) {
-                writer.write(inventory.toString());
+                writer.write(product.toString());
                 writer.newLine();
             }
         } catch (Exception e) {
