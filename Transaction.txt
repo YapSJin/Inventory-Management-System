@@ -1,0 +1,6 @@
+1|Firetruck|50|15.00|5.00|Sale|25|375.00
+1|Firetruck|50|15.00|5.00|Restock|15|75.00
+2|Hot Wheels|150|23.50|10.00|Sale|75|1762.50
+2|Hot Wheels|150|23.50|10.00|Restock|55|550.00
+3|Lego Castle|200|129.90|75.00|Sale|50|6495.00
+3|Lego Castle|200|129.90|75.00|Restock|30|2250.00

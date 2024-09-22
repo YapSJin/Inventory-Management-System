@@ -32,8 +32,9 @@ public class StaffManagement {
         do {
             System.out.println("\nWelcome Admin, what do you like to do?");
             System.out.println("1. Report Module");
-            System.out.println("2. Display All Staff");
-            System.out.println("3. Manage Staff");
+            System.out.println("2. Inventory Management Module");
+            System.out.println("3. Display All Staff");
+            System.out.println("4. Manage Staff");
             System.out.println("0. Logout");
             System.out.println("-------------------------------------------");
             System.out.print("Enter your choice: ");
@@ -46,11 +47,15 @@ public class StaffManagement {
 
             switch (choice) {
                 case 1:
+                    ReportMenu.main(scanner);
                     break;
                 case 2:
-                    displayAll();
+                    InventoryMenu.main(scanner);
                     break;
                 case 3:
+                    displayAll();
+                    break;
+                case 4:
                     manageStaff(scanner);
                     break;
                 case 0:
@@ -267,6 +272,7 @@ public class StaffManagement {
 
             switch (choice) {
                 case 1:
+                    InventoryMenu.main(scanner);
                     break;
                 case 2:
                     viewSalary(staff);
