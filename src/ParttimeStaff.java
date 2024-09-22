@@ -32,7 +32,7 @@ public class ParttimeStaff extends Staff {
         do {
             System.out.println(this.toString());
 
-            System.out.print("\nEnter field to update, done to confirm: ");
+            System.out.print("Enter field to update, done to confirm: ");
             String field = scanner.nextLine();
 
             switch (field) {
