@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ReportMenu {
-
     public static void main(Scanner scanner) {
         Inventory inventory = new Inventory();
         Profit profit = new Profit();

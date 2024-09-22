@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class InventoryMenu {
-	public static String filename = "Inventory.txt";
-
 	public static void main(Scanner scanner) {
 		Inventory inv = new Inventory();
 		int choice = 0;

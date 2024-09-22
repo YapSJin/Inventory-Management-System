@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Profit {
     private static double sst = 0.06;
-    public static String filename = "../Transaction.txt";
+    private static String filename = "../Transaction.txt";
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public Profit() {

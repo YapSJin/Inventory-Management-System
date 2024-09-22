@@ -211,15 +211,6 @@ public class Inventory {
 		}
 	}
 
-	public Product getProductById(int id) {
-		for (Product product : inventory) {
-			if (product.getID() == id) {
-				return product;
-			}
-		}
-		return null;
-	}
-
 	private void loadFromFile() {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
 			String line;
