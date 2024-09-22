@@ -1,9 +1,9 @@
 public class Product {
-    private int id = 0;
+    private int id;
     private String name;
-    public int quantity;
-    public double retailPrice;
-    public double wholesalePrice;
+    private int quantity;
+    private double retailPrice;
+    private double wholesalePrice;
 
     public Product(int id, String name, int quantity, double retailPrice, double wholesalePrice) {
         this.id = id;

@@ -36,9 +36,9 @@ public class Transaction extends Product {
 
     public String toString() {
         if (getAction().equals("Restock")) {
-            return String.format("%-20s %-10d RM%-10.2f - RM%.2f", super.getName(), quantity, super.getWholesalePrice(), total);
+            return String.format("%-20s %-10d RM%-10.2f - RM%.2f", super.getName(), items, super.getWholesalePrice(), total);
         } else {
-            return String.format("%-20s %-10d RM%-10.2f + RM%.2f", super.getName(), quantity, super.getRetailPrice(), total);
+            return String.format("%-20s %-10d RM%-10.2f + RM%.2f", super.getName(), items, super.getRetailPrice(), total);
         }
     }
 }
